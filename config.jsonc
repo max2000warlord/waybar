@@ -1,0 +1,245 @@
+{
+  "layer": "top", // Waybar at top layer
+  // "position": "bottom", // Waybar position (top|bottom|left|right)
+  "margin-top": 5,
+  "height": 35,
+  "width": 1920,
+  "border-radius": 10,
+  // Choose the order of the modules
+  "modules-left": ["hyprland/workspaces"],
+  "modules-center": ["network#ulSpeed", "clock", "network#dlSpeed"],
+  "modules-right": [
+    "group/drawer",
+    "backlight",
+    "custom/media",
+    "idle_inhibitor",
+    "pulseaudio",
+    //"custom/protonmail",
+    "custom/weather",
+    "network",
+    "tray",
+    "custom/power"
+  ],
+  "bar_id": "bar-0",
+  "ipc": true,
+  "reload_style_on_change": true,
+  // Modules configuration
+  "hyprland/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": true,
+    "warp-on-scroll": false,
+    "format": "{icon}",
+    "format-icons": {
+      "1": "I",
+      "2": "II",
+      "3": "III",
+      "4": "IV",
+      "5": "V",
+      "6": "VI",
+      "7": "VII",
+      "8": "VIII",
+      "9": "IX",
+      "10": "X",
+      "urgent": "",
+      "focused": "",
+      "default": ""
+    }
+  },
+  "keyboard-state": {
+    "numlock": true,
+    "capslock": true,
+    "format": "{name} {icon}",
+    "format-icons": {
+      "locked": "",
+      "unlocked": ""
+    }
+  },
+  "hyprland/mode": {
+    "format": "<span style=\"italic\">{}</span>"
+  },
+  "hyprland/scratchpad": {
+    "format": "{icon} {count}",
+    "show-empty": false,
+    "format-icons": ["", ""],
+    "tooltip": true,
+    "tooltip-format": "{app}: {title}"
+  },
+  "group/drawer": {
+    "orientation": "horizontal",
+    "drawer": {
+      "transition-duration": 500,
+      "children-class": "drawer-child",
+      "transition-left-to-right": false
+    },
+    "modules": [
+      "battery",
+      "cpu",
+      "memory",
+      "temperature"
+      //"custom/quit",
+      //"custom/lock",
+      //"custom/reboot"
+    ]
+  },
+  "mpd": {
+    "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
+    "format-disconnected": "Disconnected ",
+    "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+    "unknown-tag": "N/A",
+    "interval": 2,
+    "consume-icons": {
+      "on": " "
+    },
+    "random-icons": {
+      "off": "<span color=\"#f53c3c\"></span> ",
+      "on": " "
+    },
+    "repeat-icons": {
+      "on": " "
+    },
+    "single-icons": {
+      "on": "1 "
+    },
+    "state-icons": {
+      "paused": "",
+      "playing": ""
+    },
+    "tooltip-format": "MPD (connected)",
+    "tooltip-format-disconnected": "MPD (disconnected)"
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": ""
+    }
+  },
+  "tray": {
+    "icon-size": 30,
+    "spacing": 10,
+    "blueman": "bluetooth"
+  },
+  "clock": {
+    // "timezone": "Australia/Sydney",
+    "format": "{:%H:%M}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": "{:%d/%m/%Y}"
+  },
+  "cpu": {
+    "format": " {usage}%",
+    "tooltip": false
+  },
+  "memory": {
+    "format": " {}%"
+  },
+  "temperature": {
+    // "thermal-zone": 2,
+    // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+    "critical-threshold": 80,
+    // "format-critical": "{temperatureC}°C {icon}",
+    "format": "{icon} {temperatureC}󰔄",
+    "format-icons": ["", "", "", "", ""]
+  },
+  "backlight": {
+    // "device": "acpi_video1",
+    "format": "{icon}",
+    "tooltip-format": " {percent}%",
+    "format-icons": ["", "", "", "", "", "", "", "", ""]
+  },
+  "battery": {
+    "states": {
+      "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": "{capacity}% ",
+    "format-plugged": "{capacity}% ",
+    "format-alt": "{time} {icon}",
+    // "format-good": "", // An empty format will hide the module
+    // "format-full": "",
+    "format-icons": ["", "", "", "", ""]
+  },
+  "network": {
+    // "interface": "wlp2*", // (Optional) To force the use of this interface
+    "format-wifi": "{icon}",
+    "format-ethernet": "{ipaddr}/{cidr}",
+    "tooltip-format": "IP: {ipaddr}\nSignal Strength: {signalStrength}%",
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+    "on-click": "nm-applet"
+  },
+  "pulseaudio": {
+    "format": "{icon}",
+    "format-bluetooth": "{icon}",
+    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": " {format_source}",
+    //"format-source": " {volume}% ",
+    //"format-source-muted": "",
+    "tooltip-format": "{volume}%",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "󱡏",
+      "headset": "󱡏",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""]
+    },
+    "on-click": "pavucontrol"
+  },
+  "custom/media": {
+    "format": "{icon} {}",
+    "return-type": "json",
+    "max-length": 40,
+    "format-icons": {
+      "spotify": "",
+      "default": "🎜"
+    },
+    "escape": true,
+    "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+    // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+  },
+  //"custom/protonmail": {
+  //  "exec": "bar-protonmail",
+  //  "return-type": "json",
+  //  "interval": 10,
+  //  "tooltip": false,
+  //  "on-click": "proton-mail"
+  //},
+  "custom/weather": {
+    "format": "{}°C",
+    "tooltip": true,
+    "interval": 900,
+    "exec": "wttrbar --location 'Riverwood NSW 2210, Australia'",
+    "return-type": "json"
+  },
+  "custom/power": {
+    "format": "⏻",
+    "tooltip": false,
+    "menu": "on-click",
+    "menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
+    "menu-actions": {
+      "shutdown": "loginctl shutdown",
+      "reboot": "loginctl reboot",
+      "suspend": "loginctl suspend",
+      "hibernate": "loginctl hibernate"
+    }
+  },
+  "custom/spacer": {
+    "format": " ",
+    "tooltip": false
+  },
+  "network#dlSpeed": {
+    "interval": 1,
+    "format": "󰜮{bandwidthDownBytes}",
+    "max-length": 30,
+    "tooltip": false
+  },
+  "network#ulSpeed": {
+    "interval": 1,
+    "format": "󰜷{bandwidthUpBytes}",
+    "max-length": 30,
+    //"format": "󰜮{bandwidthDownBytes} 󰜷{bandwidthUpBytes}",
+    "tooltip": false
+  }
+}
